@@ -1,29 +1,21 @@
-# 🚀 AWS Cloud Journey - Wandy
+# Project 1 - Static Website Hosting on AWS
 
-This repository documents my journey becoming a Cloud & DevOps Engineer.
+## Objective
+Deploy a static website in AWS using S3 and CloudFront.
 
-## 🌐 Project 1: Static Website Hosting (S3 + CloudFront)
+## Architecture
+User -> CloudFront -> S3 Static Website Hosting
 
-### 🔧 Technologies:
-- AWS S3
-- AWS CloudFront
-- IAM
-- Static Website Hosting
+## Steps completed
+1. Created the S3 bucket
+2. Uploaded the website files
+3. Configured public access
+4. Added bucket policy
+5. Enabled static website hosting
+6. Created CloudFront distribution
+7. Verified HTTPS access
 
-### 🚀 What I built:
-- Hosted a static website on S3
-- Configured public access with bucket policy
-- Integrated CloudFront CDN
-- Enabled HTTPS
-
-### 🔗 Live Demo:
-https://dxxxxx.cloudfront.net
-
-### 📸 Screenshots:
-(agrega imágenes aquí)
-
-### 🧠 What I learned:
-- S3 static hosting
-- Bucket policies
-- CDN with CloudFront
-- HTTPS configuration
+## Key lessons learned
+- How S3 bucket policies work
+- Difference between S3 REST endpoint and website endpoint
+- Why CloudFront is useful for HTTPS and CDN delivery
