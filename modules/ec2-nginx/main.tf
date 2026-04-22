@@ -1,15 +1,3 @@
-terraform {
-  backend "s3" {
-    bucket         = "wandy-terraform-state-862087104485"
-    key            = "project-4/terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "terraform-lock"
-  }
-}
-provider "aws" {
-  region = "us-east-1"
-}
-
 data "aws_vpc" "default" {
   default = true
 }
@@ -38,7 +26,7 @@ data "aws_ami" "amazon_linux" {
 }
 
 resource "aws_security_group" "nginx_sg" {
-  name        = "wandy-nginx-sg"
+  name        = "${var.environment}-nginx-sg"
   description = "Allow SSH and HTTP"
   vpc_id      = data.aws_vpc.default.id
 
@@ -47,7 +35,7 @@ resource "aws_security_group" "nginx_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.ssh_cidrs
   }
 
   ingress {
@@ -55,7 +43,7 @@ resource "aws_security_group" "nginx_sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.http_cidrs
   }
 
   egress {
@@ -66,14 +54,15 @@ resource "aws_security_group" "nginx_sg" {
   }
 
   tags = {
-    Name    = "wandy-nginx-sg"
-    Project = "aws-cloud-journey"
+    Name        = "${var.environment}-nginx-sg"
+    Environment = var.environment
+    Project     = var.project_name
   }
 }
 
 resource "aws_instance" "nginx_server" {
   ami                         = data.aws_ami.amazon_linux.id
-  instance_type               = "t3.micro"
+  instance_type               = var.instance_type
   subnet_id                   = data.aws_subnets.default.ids[0]
   vpc_security_group_ids      = [aws_security_group.nginx_sg.id]
   associate_public_ip_address = true
@@ -86,26 +75,19 @@ resource "aws_instance" "nginx_server" {
               systemctl start nginx
               cat > /usr/share/nginx/html/index.html <<'HTML'
               <html>
-                <head><title>Wandy EC2 Nginx Lab</title></head>
+                <head><title>${var.environment} - Wandy EC2 Nginx Lab</title></head>
                 <body style="font-family: Arial; text-align: center; margin-top: 50px;">
-                  <h1>🚀 EC2 + Nginx with Terraform</h1>
+                  <h1>🚀 ${var.environment} EC2 + Nginx with Terraform</h1>
                   <h2>Wandy DevOps Journey</h2>
-                  <p>Project 4 running on AWS EC2</p>
+                  <p>Project running on AWS EC2</p>
                 </body>
               </html>
               HTML
               EOF
 
   tags = {
-    Name    = "wandy-nginx-server"
-    Project = "aws-cloud-journey"
+    Name        = "${var.environment}-nginx-server"
+    Environment = var.environment
+    Project     = var.project_name
   }
-}
-
-output "public_ip" {
-  value = aws_instance.nginx_server.public_ip
-}
-
-output "public_dns" {
-  value = aws_instance.nginx_server.public_dns
 }
