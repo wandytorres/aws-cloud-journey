@@ -1,0 +1,25 @@
+name: Terraform Destroy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::862087104485:role/github-actions-terraform-role
+          aws-region: us-east-1
+
+      - name: Terraform Destroy
+        working-directory: project-4-terraform-ec2-nginx
+        run: terraform destroy -auto-approve
