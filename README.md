@@ -1,29 +1,75 @@
-# 🚀 AWS Cloud Journey - Wandy
+# 🚀 DevOps & Cloud Journey – Wandy Torres
 
-This repository documents my journey becoming a Cloud & DevOps Engineer.
+This repository documents my hands-on journey becoming a Cloud & DevOps Engineer using AWS and Terraform.
 
-## 🌐 Project 1: Static Website Hosting (S3 + CloudFront)
+---
 
-### 🔧 Technologies:
-- AWS S3
-- AWS CloudFront
-- IAM
-- Static Website Hosting
+## 🧱 Projects
 
-### 🚀 What I built:
-- Hosted a static website on S3
-- Configured public access with bucket policy
-- Integrated CloudFront CDN
-- Enabled HTTPS
+### 🔹 Project 1 – Static Website (S3 + CloudFront)
 
-### 🔗 Live Demo:
-https://dxxxxx.cloudfront.net
+* Deployed a static website using AWS S3
+* Configured CloudFront for HTTPS delivery
+* Learned bucket policies and CDN behavior
 
-### 📸 Screenshots:
-(agrega imágenes aquí)
+---
 
-### 🧠 What I learned:
-- S3 static hosting
-- Bucket policies
-- CDN with CloudFront
-- HTTPS configuration
+### 🔹 Project 2 – Terraform S3
+
+* Provisioned S3 using Terraform
+* Introduced Infrastructure as Code (IaC)
+* Practiced `init`, `plan`, `apply`, `destroy`
+
+---
+
+### 🔹 Project 3 – Terraform + CloudFront
+
+* Automated full website deployment with Terraform
+* Created S3 + CloudFront distribution
+* Learned provisioning delays and CDN lifecycle
+
+---
+
+### 🔹 Project 4 – EC2 + Nginx (Terraform)
+
+* Deployed EC2 instance with Security Group
+* Automated Nginx installation using `user_data`
+* Exposed web server via public IP
+
+---
+
+## ⚙️ CI/CD (GitHub Actions)
+
+* Automated Terraform execution on push
+* Integrated AWS authentication via OIDC (no static keys)
+* Secure deployment pipeline
+
+---
+
+## 🔐 Security Improvements
+
+* Migrated from AWS Access Keys → OIDC authentication
+* Restricted IAM role to:
+
+  * specific repository
+  * specific branch (main)
+
+---
+
+## 🚀 Next Steps
+
+* Remote backend (S3 + DynamoDB)
+* Multi-environment (dev / prod)
+* Approval-based deployments
+* Docker + Kubernetes
+
+---
+
+## 🧠 Key Skills Demonstrated
+
+* AWS (S3, EC2, CloudFront, IAM)
+* Terraform (IaC)
+* Git & GitHub
+* CI/CD pipelines
+* Linux administration
+
