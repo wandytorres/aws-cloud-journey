@@ -41,7 +41,3 @@ jobs:
       - name: Terraform Plan
         working-directory: project-4-terraform-ec2-nginx
         run: terraform plan
-
-      - name: Terraform Apply
-        working-directory: project-4-terraform-ec2-nginx
-        run: terraform apply -auto-approve
