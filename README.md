@@ -56,26 +56,6 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 
 ---
 
-## 🚀 Next Steps
-
-* Remote backend (S3 + DynamoDB)
-* Multi-environment (dev / prod)
-* Approval-based deployments
-* Docker + Kubernetes
-
----
-
-## 🧠 Key Skills Demonstrated
-
-* AWS (S3, EC2, CloudFront, IAM)
-* Terraform (IaC)
-* Git & GitHub
-* CI/CD pipelines
-* Linux administration
-
----
-
-
 ## CI/CD and Security
 
 ### GitHub Actions Pipeline
@@ -97,3 +77,21 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 * Added manual approval before production execution
 * Added a separate workflow for manual destroy operations
 
+---
+
+## 🚀 Next Steps
+
+* Remote backend (S3 + DynamoDB)
+* Multi-environment (dev / prod)
+* Approval-based deployments
+* Docker + Kubernetes
+
+---
+
+## 🧠 Key Skills Demonstrated
+
+* AWS (S3, EC2, CloudFront, IAM)
+* Terraform (IaC)
+* Git & GitHub
+* CI/CD pipelines
+* Linux administration
