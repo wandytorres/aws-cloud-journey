@@ -73,3 +73,27 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 * CI/CD pipelines
 * Linux administration
 
+---
+
+
+## CI/CD and Security
+
+### GitHub Actions Pipeline
+
+* Automated Terraform execution on push to `main`
+* Added format, validation, and planning stages
+* Protected deployments using GitHub Environments
+
+### Secure AWS Authentication
+
+* Replaced static AWS access keys with GitHub OIDC federation
+* Configured an IAM role restricted to:
+
+  * repository: `wandytorres/aws-cloud-journey`
+  * environment: `production`
+
+### Deployment Controls
+
+* Added manual approval before production execution
+* Added a separate workflow for manual destroy operations
+
