@@ -38,7 +38,7 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 
 ---
 
-## ⚙️ CI/CD (GitHub Actions)
+## ⚙️ Project 5 CI/CD (GitHub Actions)
 
 * Automated Terraform execution on push
 * Integrated AWS authentication via OIDC (no static keys)
@@ -56,7 +56,7 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 
 ---
 
-## CI/CD and Security
+## Project 6 CI/CD and Security
 
 ### GitHub Actions Pipeline
 
