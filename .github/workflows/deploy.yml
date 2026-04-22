@@ -43,6 +43,3 @@ jobs:
         working-directory: project-4-terraform-ec2-nginx
         run: terraform plan
         
-      - name: Terraform destroy
-        working-directory: project-4-terraform-ec2-nginx
-        run: terraform destroy
