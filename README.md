@@ -78,6 +78,20 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 * Added a separate workflow for manual destroy operations
 
 ---
+## 🌍 Multi-Environment Structure
+
+This repository includes a reusable Terraform module and separate environments:
+
+* `modules/ec2-nginx` → reusable EC2 + Nginx module
+* `environments/dev` → development deployment
+* `environments/prod` → production deployment
+
+### Benefits
+
+* Reusable Terraform code
+* Environment separation
+* Cleaner CI/CD promotion flow
+* Easier scaling to real-world infrastructure
 
 ## 🚀 Next Steps
 
