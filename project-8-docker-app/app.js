@@ -1,7 +1,7 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  res.end("🚀 Wandy DevOps Docker App Running!");
+  res.end("🚀 Version 2 deployed form CI/CD!");
 });
 
 server.listen(3000, () => {
