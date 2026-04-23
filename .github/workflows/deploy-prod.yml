@@ -1,12 +1,10 @@
-name: Terraform Deploy
+name: Deploy PROD
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  terraform:
+  terraform-prod:
     runs-on: ubuntu-latest
     environment: production
 
@@ -28,18 +26,21 @@ jobs:
           aws-region: us-east-1
 
       - name: Terraform Init
-        working-directory: project-4-terraform-ec2-nginx
+        working-directory: environments/prod
         run: terraform init
 
       - name: Terraform Format Check
-        working-directory: project-4-terraform-ec2-nginx
+        working-directory: environments/prod
         run: terraform fmt -check
 
       - name: Terraform Validate
-        working-directory: project-4-terraform-ec2-nginx
+        working-directory: environments/prod
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: project-4-terraform-ec2-nginx
+        working-directory: environments/prod
         run: terraform plan
-        
+
+      - name: Terraform Apply
+        working-directory: environments/prod
+        run: terraform apply -auto-approve

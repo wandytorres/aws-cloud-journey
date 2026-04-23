@@ -1,0 +1,51 @@
+name: Deploy DEV
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'environments/dev/**'
+      - 'modules/**'
+      - '.github/workflows/deploy-dev.yml'
+
+jobs:
+  terraform-dev:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials with OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::862087104485:role/github-actions-terraform-role
+          aws-region: us-east-1
+
+      - name: Terraform Init
+        working-directory: environments/dev
+        run: terraform init
+
+      - name: Terraform Format Check
+        working-directory: environments/dev
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        working-directory: environments/dev
+        run: terraform validate
+
+      - name: Terraform Plan
+        working-directory: environments/dev
+        run: terraform plan
+
+      - name: Terraform Apply
+        working-directory: environments/dev
+        run: terraform apply -auto-approve

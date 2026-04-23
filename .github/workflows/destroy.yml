@@ -2,24 +2,42 @@ name: Terraform Destroy
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to destroy"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - prod
 
 jobs:
   destroy:
     runs-on: ubuntu-latest
+    environment: production
 
     permissions:
       id-token: write
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: aws-actions/configure-aws-credentials@v4
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS credentials with OIDC
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::862087104485:role/github-actions-terraform-role
           aws-region: us-east-1
 
+      - name: Terraform Init
+        working-directory: environments/${{ github.event.inputs.environment }}
+        run: terraform init
+
       - name: Terraform Destroy
-        working-directory: project-4-terraform-ec2-nginx
+        working-directory: environments/${{ github.event.inputs.environment }}
         run: terraform destroy -auto-approve
