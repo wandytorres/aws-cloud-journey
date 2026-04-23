@@ -1,7 +1,7 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  res.end("🚀 Version 2 deployed form CI/CD!");
+  res.end("🚀 ECS Version - CI/CD Working!");
 });
 
 server.listen(3000, () => {
