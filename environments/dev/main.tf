@@ -22,9 +22,9 @@ module "ec2_nginx" {
   source = "../../modules/ec2-nginx"
 
   environment   = "dev"
-  instance_type = "t3.micro"
-  ssh_cidrs     = ["0.0.0.0/0"]
-  http_cidrs    = ["0.0.0.0/0"]
+  instance_type = var.instance_type
+  ssh_cidrs     = var.ssh_cidrs
+  http_cidrs    = var.http_cidrs
 }
 
 output "public_ip" {
