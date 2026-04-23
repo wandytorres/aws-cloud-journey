@@ -1,6 +1,6 @@
 # 🚀 DevOps & Cloud Journey – Wandy Torres
 
-This repository documents my hands-on journey becoming a Cloud & DevOps Engineer using AWS and Terraform.
+This repository documents my hands-on journey to becoming a Cloud & DevOps Engineer using AWS, Terraform, and CI/CD pipelines.
 
 ---
 
@@ -16,9 +16,9 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 
 ### 🔹 Project 2 – Terraform S3
 
-* Provisioned S3 using Terraform
-* Introduced Infrastructure as Code (IaC)
+* Provisioned S3 using Terraform (IaC)
 * Practiced `init`, `plan`, `apply`, `destroy`
+* Introduced infrastructure automation concepts
 
 ---
 
@@ -26,7 +26,7 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 
 * Automated full website deployment with Terraform
 * Created S3 + CloudFront distribution
-* Learned provisioning delays and CDN lifecycle
+* Learned CDN lifecycle and propagation behavior
 
 ---
 
@@ -38,84 +38,121 @@ This repository documents my hands-on journey becoming a Cloud & DevOps Engineer
 
 ---
 
-## ⚙️ Project 5 CI/CD (GitHub Actions)
+### 🔹 Project 5 – CI/CD Pipeline (GitHub Actions)
 
 * Automated Terraform execution on push
-* Integrated AWS authentication via OIDC (no static keys)
-* Secure deployment pipeline
+* Implemented CI/CD workflow with GitHub Actions
+* Introduced Infrastructure deployment automation
 
 ---
 
-## 🔐 Security Improvements
+### 🔹 Project 6 – CI/CD Security & OIDC
 
-* Migrated from AWS Access Keys → OIDC authentication
-* Restricted IAM role to:
-
-  * specific repository
-  * specific branch (main)
+* Replaced AWS Access Keys with OIDC authentication
+* Configured IAM Role for GitHub Actions
+* Secured pipeline with environment-based approvals
 
 ---
 
-## Project 6 CI/CD and Security
+### 🔹 Project 7 – Multi-Environment Terraform (DEV / PROD)
 
-### GitHub Actions Pipeline
-
-* Automated Terraform execution on push to `main`
-* Added format, validation, and planning stages
-* Protected deployments using GitHub Environments
-
-### Secure AWS Authentication
-
-* Replaced static AWS access keys with GitHub OIDC federation
-* Configured an IAM role restricted to:
-
-  * repository: `wandytorres/aws-cloud-journey`
-  * environment: `production`
-
-### Deployment Controls
-
-* Added manual approval before production execution
-* Added a separate workflow for manual destroy operations
+* Created reusable Terraform module (`ec2-nginx`)
+* Implemented environment separation (`dev` / `prod`)
+* Used `terraform.tfvars` for environment configuration
+* Integrated CI/CD workflows per environment
 
 ---
-## 🌍 Multi-Environment Structure
 
-This repository includes a reusable Terraform module and separate environments:
+## ⚙️ CI/CD Architecture
 
-* `modules/ec2-nginx` → reusable EC2 + Nginx module
-* `environments/dev` → development deployment
-* `environments/prod` → production deployment
----
-* ## 🔄 Multi-Environment CI/CD
-
-The repository uses separate GitHub Actions workflows for each environment:
+The repository uses multiple GitHub Actions workflows:
 
 * `deploy-dev.yml` → automatic deployment for development
-* `deploy-prod.yml` → manual production deployment with approval
-* `destroy.yml` → manual destroy workflow with environment selection
+* `deploy-prod.yml` → manual deployment with approval
+* `destroy.yml` → manual destroy with environment selection
 
-This approach improves safety, environment separation, and deployment control.
+### Features
+
+* Terraform automation (init, validate, plan, apply)
+* OIDC authentication (no static credentials)
+* Environment-based deployment control
+* Safe production approvals
+
 ---
+
+## 🔐 Security Best Practices
+
+* Eliminated static AWS credentials
+* Implemented GitHub OIDC federation
+* Restricted IAM role access to:
+
+  * specific repository
+  * production environment
+* Separated dev and prod configurations
+* Restricted SSH access in production
+
+---
+
+## 🌍 Infrastructure Design
+
+### Structure
+
+* `modules/ec2-nginx` → reusable infrastructure module
+* `environments/dev` → development environment
+* `environments/prod` → production environment
+
 ### Benefits
 
-* Reusable Terraform code
-* Environment separation
-* Cleaner CI/CD promotion flow
-* Easier scaling to real-world infrastructure
----
-## 🚀 Next Steps
+* Code reusability
+* Environment isolation
+* Scalable architecture
+* Production safety controls
 
-* Remote backend (S3 + DynamoDB)
-* Multi-environment (dev / prod)
-* Approval-based deployments
-* Docker + Kubernetes
+---
+
+## 🔧 Environment Configuration
+
+Each environment uses its own `terraform.tfvars` file:
+
+### Development
+
+* Open access for testing
+* Faster iteration
+* Automatic deployment
+
+### Production
+
+* Restricted SSH access (IP-based)
+* Manual approval before deployment
+* Safer configuration
 
 ---
 
 ## 🧠 Key Skills Demonstrated
 
 * AWS (S3, EC2, CloudFront, IAM)
-* Terraform (IaC)
-* Git & GitHub
-* CI/CD pipelines
+* Terraform (Infrastructure as Code)
+* CI/CD with GitHub Actions
+* OIDC Authentication
+* Multi-environment architecture
 * Linux administration
+* DevOps best practices
+
+---
+
+## 🚀 Next Step – Project 8 (In Progress)
+
+### Docker + CI/CD + EC2 Deployment
+
+* Containerize application using Docker
+* Build Docker image in CI/CD pipeline
+* Push image to container registry (ECR or Docker Hub)
+* Deploy container to EC2 automatically
+* Replace manual Nginx setup with container-based deployment
+
+---
+
+## 👨‍💻 Author
+
+Wandy Torres
+Cloud & DevOps Engineer in progress 🚀
