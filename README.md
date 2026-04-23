@@ -85,14 +85,24 @@ This repository includes a reusable Terraform module and separate environments:
 * `modules/ec2-nginx` → reusable EC2 + Nginx module
 * `environments/dev` → development deployment
 * `environments/prod` → production deployment
+---
+* ## 🔄 Multi-Environment CI/CD
 
+The repository uses separate GitHub Actions workflows for each environment:
+
+* `deploy-dev.yml` → automatic deployment for development
+* `deploy-prod.yml` → manual production deployment with approval
+* `destroy.yml` → manual destroy workflow with environment selection
+
+This approach improves safety, environment separation, and deployment control.
+---
 ### Benefits
 
 * Reusable Terraform code
 * Environment separation
 * Cleaner CI/CD promotion flow
 * Easier scaling to real-world infrastructure
-
+---
 ## 🚀 Next Steps
 
 * Remote backend (S3 + DynamoDB)
