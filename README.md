@@ -145,14 +145,14 @@ flowchart LR
 ---
 
 ## 🌐 Project 10 – ECS + ALB + Auto Scaling
-
 flowchart TD
-    A[User] --> B[ALB :80]
+    A[User] --> B[ALB]
     B --> C[Target Group]
     C --> D[ECS Service]
     D --> E[Task 1]
-    D --> F[Task 2 - Auto Scaling]
-
+    D --> F[Task 2]
+    
+    F --> G[Auto Scaling]
 * Built production-like infrastructure using Terraform
 * Implemented ALB with health checks
 * Configured ECS Auto Scaling
