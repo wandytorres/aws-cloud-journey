@@ -22,11 +22,14 @@ jobs:
       ECR_REPOSITORY: wandy-docker-app
       ECS_CLUSTER: wandy-ecs-cluster2
       ECS_SERVICE: wandy-docker-task-service
-      IMAGE_TAG: latest
+      CONTAINER_NAME: docker-app
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set image tag
+        run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Configure AWS credentials with OIDC
         uses: aws-actions/configure-aws-credentials@v4
@@ -43,24 +46,75 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG ./project-8-docker-app
+          docker build \
+            -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG \
+            ./project-8-docker-app
 
       - name: Push Docker image to ECR
         run: |
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: Debug ECS values
+      - name: Get current task definition
         run: |
-          echo "Cluster: $ECS_CLUSTER"
-          echo "Service: $ECS_SERVICE"
-          echo "Region: $AWS_REGION"
-          aws ecs list-services --cluster $ECS_CLUSTER --region $AWS_REGION
+          TASK_DEFINITION_ARN=$(aws ecs describe-services \
+            --cluster $ECS_CLUSTER \
+            --services $ECS_SERVICE \
+            --region $AWS_REGION \
+            --query "services[0].taskDefinition" \
+            --output text)
 
-      - name: Force new ECS deployment
+          echo "TASK_DEFINITION_ARN=$TASK_DEFINITION_ARN" >> $GITHUB_ENV
+
+      - name: Download current task definition
+        run: |
+          aws ecs describe-task-definition \
+            --task-definition $TASK_DEFINITION_ARN \
+            --region $AWS_REGION \
+            --query "taskDefinition" > task-definition.json
+
+      - name: Update task definition image
+        run: |
+          IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+
+          jq --arg IMAGE_URI "$IMAGE_URI" --arg CONTAINER_NAME "$CONTAINER_NAME" '
+            .containerDefinitions |= map(
+              if .name == $CONTAINER_NAME
+              then .image = $IMAGE_URI
+              else .
+              end
+            )
+            | del(
+                .taskDefinitionArn,
+                .revision,
+                .status,
+                .requiresAttributes,
+                .compatibilities,
+                .registeredAt,
+                .registeredBy
+              )
+          ' task-definition.json > new-task-definition.json
+
+      - name: Register new task definition revision
+        run: |
+          NEW_TASK_DEFINITION_ARN=$(aws ecs register-task-definition \
+            --cli-input-json file://new-task-definition.json \
+            --region $AWS_REGION \
+            --query "taskDefinition.taskDefinitionArn" \
+            --output text)
+
+          echo "NEW_TASK_DEFINITION_ARN=$NEW_TASK_DEFINITION_ARN" >> $GITHUB_ENV
+
+      - name: Deploy new task definition to ECS
         run: |
           aws ecs update-service \
             --cluster $ECS_CLUSTER \
             --service $ECS_SERVICE \
+            --task-definition $NEW_TASK_DEFINITION_ARN \
             --desired-count 1 \
             --force-new-deployment \
             --region $AWS_REGION
+
+      - name: Show deployed image
+        run: |
+          echo "Deployed image:"
+          echo "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG"
