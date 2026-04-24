@@ -1,6 +1,6 @@
 # 🚀 DevOps & Cloud Journey – Wandy Torres
 
-This repository documents my hands-on journey to becoming a Cloud & DevOps Engineer using AWS, Terraform, and CI/CD pipelines.
+This repository documents my hands-on journey to becoming a **Cloud & DevOps Engineer**, building real-world infrastructure using AWS, Terraform, Docker, and CI/CD pipelines.
 
 ---
 
@@ -9,14 +9,14 @@ This repository documents my hands-on journey to becoming a Cloud & DevOps Engin
 ### 🔹 Project 1 – Static Website (S3 + CloudFront)
 
 * Deployed a static website using AWS S3
-* Configured CloudFront for HTTPS delivery
+* Configured CloudFront for global HTTPS delivery
 * Learned bucket policies and CDN behavior
 
 ---
 
 ### 🔹 Project 2 – Terraform S3
 
-* Provisioned S3 using Terraform (IaC)
+* Provisioned S3 infrastructure using Terraform (IaC)
 * Practiced `init`, `plan`, `apply`, `destroy`
 * Introduced infrastructure automation concepts
 
@@ -24,42 +24,76 @@ This repository documents my hands-on journey to becoming a Cloud & DevOps Engin
 
 ### 🔹 Project 3 – Terraform + CloudFront
 
-* Automated full website deployment with Terraform
+* Automated full static website deployment
 * Created S3 + CloudFront distribution
-* Learned CDN lifecycle and propagation behavior
+* Learned CDN lifecycle and propagation delays
 
 ---
 
 ### 🔹 Project 4 – EC2 + Nginx (Terraform)
 
 * Deployed EC2 instance with Security Group
-* Automated Nginx installation using `user_data`
-* Exposed web server via public IP
+* Automated Nginx setup using `user_data`
+* Exposed application via public IP
 
 ---
 
 ### 🔹 Project 5 – CI/CD Pipeline (GitHub Actions)
 
-* Automated Terraform execution on push
-* Implemented CI/CD workflow with GitHub Actions
-* Introduced Infrastructure deployment automation
+* Automated Terraform deployments on push
+* Implemented CI/CD workflows using GitHub Actions
+* Introduced infrastructure deployment automation
 
 ---
 
-### 🔹 Project 6 – CI/CD Security & OIDC
+### 🔹 Project 6 – CI/CD Security (OIDC)
 
 * Replaced AWS Access Keys with OIDC authentication
 * Configured IAM Role for GitHub Actions
-* Secured pipeline with environment-based approvals
+* Secured pipelines with environment-based approvals
 
 ---
 
 ### 🔹 Project 7 – Multi-Environment Terraform (DEV / PROD)
 
-* Created reusable Terraform module (`ec2-nginx`)
+* Built reusable Terraform module (`ec2-nginx`)
 * Implemented environment separation (`dev` / `prod`)
-* Used `terraform.tfvars` for environment configuration
+* Used `terraform.tfvars` for configuration
 * Integrated CI/CD workflows per environment
+
+---
+
+## 🚀 Project 8 – Docker + CI/CD + EC2
+
+* Containerized application using Docker
+* Built and pushed images via CI/CD pipeline
+* Deployed containers to EC2 using SSH automation
+* Replaced manual server configuration with container-based deployment
+
+---
+
+## ☁️ Project 9 – ECS Fargate + ECR + CI/CD
+
+* Built cloud-native container deployment pipeline
+* Pushed Docker images to **Amazon ECR**
+* Deployed application to **ECS Fargate (serverless containers)**
+* Implemented CI/CD pipeline using GitHub Actions + OIDC
+* Enabled rolling deployments with zero manual intervention
+
+---
+
+## 🌐 Project 10 – ECS + ALB + Auto Scaling (Production Architecture)
+
+* Provisioned infrastructure using **Terraform**
+* Deployed ECS Fargate service behind **Application Load Balancer**
+* Configured **Target Group + Health Checks**
+* Implemented **Auto Scaling based on CPU utilization**
+* Achieved dynamic scaling (1–2 containers automatically)
+* Built production-like architecture:
+
+```text
+Internet → ALB → ECS Fargate → Containers
+```
 
 ---
 
@@ -69,14 +103,16 @@ The repository uses multiple GitHub Actions workflows:
 
 * `deploy-dev.yml` → automatic deployment for development
 * `deploy-prod.yml` → manual deployment with approval
-* `destroy.yml` → manual destroy with environment selection
+* `destroy.yml` → controlled resource destruction
+* `deploy-ecs.yml` → container build + deploy to ECS
 
 ### Features
 
-* Terraform automation (init, validate, plan, apply)
+* Terraform automation (`init`, `validate`, `plan`, `apply`)
+* Docker build and push pipelines
 * OIDC authentication (no static credentials)
 * Environment-based deployment control
-* Safe production approvals
+* Rolling deployments in ECS
 
 ---
 
@@ -84,12 +120,9 @@ The repository uses multiple GitHub Actions workflows:
 
 * Eliminated static AWS credentials
 * Implemented GitHub OIDC federation
-* Restricted IAM role access to:
-
-  * specific repository
-  * production environment
+* Restricted IAM roles by repository and environment
+* Applied least-privilege access model
 * Separated dev and prod configurations
-* Restricted SSH access in production
 
 ---
 
@@ -97,62 +130,53 @@ The repository uses multiple GitHub Actions workflows:
 
 ### Structure
 
-* `modules/ec2-nginx` → reusable infrastructure module
+* `modules/` → reusable Terraform modules
 * `environments/dev` → development environment
 * `environments/prod` → production environment
+* `project-*` → progressive real-world implementations
 
 ### Benefits
 
 * Code reusability
 * Environment isolation
-* Scalable architecture
-* Production safety controls
+* Scalable cloud architecture
+* Safe production deployments
 
 ---
 
-## 🔧 Environment Configuration
+## 📦 Technologies Used
 
-Each environment uses its own `terraform.tfvars` file:
-
-### Development
-
-* Open access for testing
-* Faster iteration
-* Automatic deployment
-
-### Production
-
-* Restricted SSH access (IP-based)
-* Manual approval before deployment
-* Safer configuration
+* AWS (S3, EC2, ECS, ECR, ALB, IAM, CloudWatch)
+* Terraform (Infrastructure as Code)
+* Docker (Containerization)
+* GitHub Actions (CI/CD)
+* OIDC (Secure authentication)
+* Linux
 
 ---
 
 ## 🧠 Key Skills Demonstrated
 
-* AWS (S3, EC2, CloudFront, IAM)
-* Terraform (Infrastructure as Code)
-* CI/CD with GitHub Actions
-* OIDC Authentication
-* Multi-environment architecture
-* Linux administration
-* DevOps best practices
+* Cloud Infrastructure Design
+* Infrastructure as Code (Terraform)
+* CI/CD Pipelines
+* Containerization & Orchestration
+* AWS Cloud-Native Services
+* Security Best Practices
+* Auto Scaling & Load Balancing
 
 ---
 
-## 🚀 Next Step – Project 8 (In Progress)
+## 🚀 Next Steps
 
-### Docker + CI/CD + EC2 Deployment
-
-* Containerize application using Docker
-* Build Docker image in CI/CD pipeline
-* Push image to container registry (ECR or Docker Hub)
-* Deploy container to EC2 automatically
-* Replace manual Nginx setup with container-based deployment
+* 🔒 HTTPS with ACM + custom domain
+* 📊 Monitoring & alerting (CloudWatch)
+* 🔄 Blue/Green deployments
+* ☸️ Kubernetes (EKS)
 
 ---
 
 ## 👨‍💻 Author
 
-Wandy Torres
+**Wandy Torres**
 Cloud & DevOps Engineer in progress 🚀
