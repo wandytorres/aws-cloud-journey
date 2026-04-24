@@ -19,7 +19,7 @@ jobs:
       AWS_REGION: us-east-1
       ECR_REPOSITORY: wandy-docker-app
       ECS_CLUSTER: wandy-ecs-cluster2
-      ECS_SERVICE: wandy-docker-service
+      ECS_SERVICE: wandy-docker-task-service
       IMAGE_TAG: latest
 
     steps:
@@ -49,5 +49,6 @@ jobs:
           aws ecs update-service \
             --cluster $ECS_CLUSTER \
             --service $ECS_SERVICE \
+            --desired-count 1 \
             --force-new-deployment \
             --region $AWS_REGION
