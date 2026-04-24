@@ -6,34 +6,29 @@ This repository documents my journey to becoming a **Cloud & DevOps Engineer**, 
 
 # 🌐 Architecture Overview
 
-## 🔥 Current Production Architecture
+## 🔥 Production Architecture (ECS + ALB + Auto Scaling)
 
 ```mermaid
 flowchart TD
-    A[User Browser] --> B[Application Load Balancer :80]
+    A[User] --> B[Application Load Balancer]
     B --> C[Target Group]
     C --> D[ECS Fargate Service]
-    D --> E[Docker Container :3000]
-
-    subgraph AWS Cloud
-        B
-        C
-        D
-        E
-    end
+    D --> E[Task 1]
+    D --> F[Task 2 - Auto Scaling]
 ```
 
 ---
 
-## ⚙️ CI/CD Pipeline Architecture
+## ⚙️ CI/CD Pipeline
 
 ```mermaid
 flowchart LR
-    A[GitHub Push] --> B[GitHub Actions]
+    A[Git Push] --> B[GitHub Actions]
     B --> C[OIDC Authentication]
-    C --> D[Amazon ECR]
-    D --> E[ECS Fargate]
-    E --> F[Application Load Balancer]
+    C --> D[Build Docker Image]
+    D --> E[Push to Amazon ECR]
+    E --> F[Update ECS Service]
+    F --> G[ALB Traffic Routing]
 ```
 
 ---
@@ -62,31 +57,31 @@ ALB Routes Traffic to Healthy Containers
 
 ## 🔹 Project 1 – Static Website (S3 + CloudFront)
 
-* Deployed static site using S3
+* Deployed static website using S3
 * Configured CloudFront for CDN delivery
-* Implemented bucket policies
+* Managed bucket policies
 
 ---
 
 ## 🔹 Project 2 – Terraform S3
 
-* Provisioned S3 using Terraform
-* Introduced Infrastructure as Code
-* Practiced Terraform lifecycle
+* Provisioned S3 using Terraform (IaC)
+* Practiced Terraform lifecycle commands
+* Introduced infrastructure automation
 
 ---
 
 ## 🔹 Project 3 – Terraform + CloudFront
 
-* Automated full static site deployment
-* Managed CDN lifecycle
+* Automated full static deployment
+* Managed CDN behavior and propagation
 
 ---
 
 ## 🔹 Project 4 – EC2 + Nginx (Terraform)
 
 * Deployed EC2 instance
-* Automated Nginx setup
+* Automated Nginx setup with `user_data`
 * Exposed service via public IP
 
 ---
@@ -94,15 +89,15 @@ ALB Routes Traffic to Healthy Containers
 ## 🔹 Project 5 – CI/CD Pipeline
 
 * Automated Terraform deployments
-* Implemented GitHub Actions workflows
+* Built CI/CD workflows using GitHub Actions
 
 ---
 
 ## 🔹 Project 6 – CI/CD Security (OIDC)
 
-* Eliminated static credentials
-* Configured IAM role with OIDC
-* Secured pipelines
+* Removed AWS Access Keys
+* Implemented OIDC authentication
+* Configured IAM roles securely
 
 ---
 
@@ -110,6 +105,7 @@ ALB Routes Traffic to Healthy Containers
 
 * Created reusable modules
 * Implemented dev/prod separation
+* Used `terraform.tfvars`
 * Integrated CI/CD per environment
 
 ---
@@ -118,7 +114,7 @@ ALB Routes Traffic to Healthy Containers
 
 ```mermaid
 flowchart LR
-    A[GitHub] --> B[Build Docker Image]
+    A[GitHub] --> B[Build Image]
     B --> C[Docker Hub]
     C --> D[EC2 Instance]
 ```
@@ -133,7 +129,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[GitHub] --> B[Build Image]
+    A[GitHub] --> B[Build Docker Image]
     B --> C[Amazon ECR]
     C --> D[ECS Fargate]
 ```
@@ -145,18 +141,22 @@ flowchart LR
 ---
 
 ## 🌐 Project 10 – ECS + ALB + Auto Scaling
+
+```mermaid
 flowchart TD
     A[User] --> B[ALB]
     B --> C[Target Group]
     C --> D[ECS Service]
     D --> E[Task 1]
     D --> F[Task 2]
-    
     F --> G[Auto Scaling]
+```
+
 * Built production-like infrastructure using Terraform
-* Implemented ALB with health checks
-* Configured ECS Auto Scaling
-* Enabled dynamic scaling (1–2 tasks)
+* Implemented Application Load Balancer
+* Configured health checks with Target Group
+* Enabled ECS Auto Scaling (CPU-based)
+* Achieved dynamic scaling of containers
 
 ---
 
@@ -165,15 +165,24 @@ flowchart TD
 * `deploy-dev.yml` → automatic deployment (dev)
 * `deploy-prod.yml` → manual deployment (prod)
 * `deploy-ecs.yml` → Docker build + ECS deploy
-* `destroy.yml` → controlled teardown
+* `destroy.yml` → controlled infrastructure teardown
+
+### Features
+
+* Terraform automation (`init`, `validate`, `plan`, `apply`)
+* Docker build and push pipelines
+* OIDC authentication (secure)
+* Environment-based deployments
+* Rolling deployments in ECS
 
 ---
 
 # 🔐 Security Best Practices
 
-* OIDC authentication (no AWS keys)
+* No static AWS credentials
+* OIDC federation with GitHub
 * Least-privilege IAM roles
-* Environment-based restrictions
+* Environment isolation
 * Secure CI/CD pipelines
 
 ---
@@ -193,7 +202,8 @@ flowchart TD
 * Infrastructure as Code (Terraform)
 * CI/CD Pipeline Design
 * Cloud Architecture (AWS)
-* Containerization & Orchestration
+* Containerization (Docker)
+* Orchestration (ECS)
 * Auto Scaling & Load Balancing
 * Security Best Practices
 
