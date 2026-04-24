@@ -5,6 +5,7 @@ on:
     paths:
       - 'project-8-docker-app/**'
       - '.github/workflows/deploy-ecs.yml'
+  workflow_dispatch:
 
 jobs:
   deploy-ecs:
@@ -17,6 +18,7 @@ jobs:
 
     env:
       AWS_REGION: us-east-1
+      AWS_ACCOUNT_ID: "862087104485"
       ECR_REPOSITORY: wandy-docker-app
       ECS_CLUSTER: wandy-ecs-cluster2
       ECS_SERVICE: wandy-docker-task-service
@@ -32,17 +34,27 @@ jobs:
           role-to-assume: arn:aws:iam::862087104485:role/github-actions-terraform-role
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
       - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        run: |
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} ./project-8-docker-app
+          docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG ./project-8-docker-app
 
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Debug ECS values
+        run: |
+          echo "Cluster: $ECS_CLUSTER"
+          echo "Service: $ECS_SERVICE"
+          echo "Region: $AWS_REGION"
+          aws ecs list-services --cluster $ECS_CLUSTER --region $AWS_REGION
 
       - name: Force new ECS deployment
         run: |
