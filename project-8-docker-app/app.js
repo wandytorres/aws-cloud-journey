@@ -1,7 +1,7 @@
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  res.end("🚀 ECS Version 2 deployed from CI/CD Working!");
+  res.end("🚀 ECS CI/CD funcionando desde GitHub Actions!");
 });
 
 server.listen(3000, () => {
