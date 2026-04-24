@@ -27,3 +27,7 @@ variable "memory" {
   type    = number
   default = 512
 }
+variable "alert_email" {
+  type        = string
+  description = "Email address for CloudWatch alarm notifications"
+}
