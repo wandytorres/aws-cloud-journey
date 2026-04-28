@@ -19,6 +19,21 @@ flowchart TD
 
 ---
 
+## 🔄 Blue/Green Deployment Architecture (ALB Weighted Routing)
+
+```mermaid
+flowchart TD
+    A[User] --> B[ALB Listener]
+
+    B -->|100%| C[Green Target Group]
+    B -->|0%| D[Blue Target Group]
+
+    C --> E[ECS Green Service]
+    D --> F[ECS Blue Service]
+```
+
+---
+
 ## ⚙️ CI/CD Pipeline
 
 ```mermaid
@@ -160,6 +175,26 @@ flowchart TD
 
 ---
 
+## 🔄 Project 11 – Blue/Green Deployment (ALB Weighted Routing)
+
+* Implemented Blue/Green deployment strategy without CodeDeploy
+* Created separate **Blue and Green ECS services**
+* Configured **ALB weighted routing between target groups**
+* Tested traffic shifting (100% Blue → 50/50 → 100% Green)
+* Enabled safer deployments with rollback capability
+
+```mermaid
+flowchart LR
+    A[User] --> B[ALB]
+    B -->|Traffic Split| C[Blue Target Group]
+    B -->|Traffic Split| D[Green Target Group]
+
+    C --> E[ECS Blue Service]
+    D --> F[ECS Green Service]
+```
+
+---
+
 # ⚙️ CI/CD Workflows
 
 * `deploy-dev.yml` → automatic deployment (dev)
@@ -187,6 +222,15 @@ flowchart TD
 
 ---
 
+# 📊 Monitoring & Observability
+
+* CloudWatch Alarms (CPU, Memory, ALB errors)
+* SNS email notifications
+* CloudWatch Dashboard (real-time metrics)
+* ECS service health monitoring
+
+---
+
 # 📦 Tech Stack
 
 * AWS (S3, EC2, ECS, ECR, ALB, IAM, CloudWatch)
@@ -205,6 +249,8 @@ flowchart TD
 * Containerization (Docker)
 * Orchestration (ECS)
 * Auto Scaling & Load Balancing
+* Blue/Green Deployment Strategies
+* Monitoring & Alerting
 * Security Best Practices
 
 ---
@@ -212,8 +258,8 @@ flowchart TD
 # 🚀 Next Steps
 
 * 🔒 HTTPS with ACM + Domain
-* 📊 Monitoring & Alerting (CloudWatch)
-* 🔄 Blue/Green Deployments
+* 📊 Advanced Monitoring Dashboards
+* 🔄 Canary Deployments
 * ☸️ Kubernetes (EKS)
 
 ---
