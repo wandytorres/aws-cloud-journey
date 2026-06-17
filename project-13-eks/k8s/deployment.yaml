@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wandy-docker-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wandy-docker-app
+  template:
+    metadata:
+      labels:
+        app: wandy-docker-app
+    spec:
+      containers:
+        - name: docker-app
+          image: 862087104485.dkr.ecr.us-east-1.amazonaws.com/wandy-docker-app:latest
+          ports:
+            - containerPort: 3000
