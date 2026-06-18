@@ -34,6 +34,10 @@ data "aws_subnets" "default" {
 resource "aws_ecs_cluster" "main" {
   name = "${var.project_name}-cluster"
 
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
   tags = {
     Project = var.project_name
   }
@@ -165,7 +169,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_policy" {
 
 resource "aws_cloudwatch_log_group" "app" {
   name              = "/ecs/${var.project_name}"
-  retention_in_days = 7
+  retention_in_days = 365
 
   tags = {
     Project = var.project_name
