@@ -193,78 +193,109 @@ flowchart LR
     D --> F[ECS Green Service]
 ```
 
----
+# README Updates (Projects 12–14)
 
-# ⚙️ CI/CD Workflows
+## 🔒 Project 12 – HTTPS + ACM + Custom Domain
 
-* `deploy-dev.yml` → automatic deployment (dev)
-* `deploy-prod.yml` → manual deployment (prod)
-* `deploy-ecs.yml` → Docker build + ECS deploy
-* `destroy.yml` → controlled infrastructure teardown
+```mermaid
+flowchart LR
+    A[User] --> B[Route53 / DNS]
+    B --> C[ACM Certificate]
+    C --> D[Application Load Balancer]
+    D --> E[ECS Service]
+```
 
-### Features
-
-* Terraform automation (`init`, `validate`, `plan`, `apply`)
-* Docker build and push pipelines
-* OIDC authentication (secure)
-* Environment-based deployments
-* Rolling deployments in ECS
-
----
-
-# 🔐 Security Best Practices
-
-* No static AWS credentials
-* OIDC federation with GitHub
-* Least-privilege IAM roles
-* Environment isolation
-* Secure CI/CD pipelines
+* Created a custom subdomain (`devops.asomap.com.do`)
+* Issued and validated ACM SSL/TLS certificates
+* Configured HTTPS listener on ALB
+* Implemented DNS validation using CNAME records
+* Enabled secure end-to-end traffic encryption
 
 ---
 
-# 📊 Monitoring & Observability
+## ☸️ Project 13 – Kubernetes (EKS)
 
-* CloudWatch Alarms (CPU, Memory, ALB errors)
-* SNS email notifications
-* CloudWatch Dashboard (real-time metrics)
-* ECS service health monitoring
+```mermaid
+flowchart TD
+    A[User] --> B[AWS LoadBalancer]
+    B --> C[Kubernetes Service]
+    C --> D[Pod 1]
+    C --> E[Pod 2]
+
+    D --> F[EKS Node Group]
+    E --> F
+```
+
+* Provisioned Amazon EKS using Terraform
+* Created Managed Node Groups
+* Configured kubectl access and authentication
+* Deployed containerized applications using Kubernetes Deployments
+* Exposed applications using Kubernetes Services (LoadBalancer)
+* Managed Kubernetes resources declaratively
 
 ---
 
-# 📦 Tech Stack
+## 🔐 Project 14 – DevSecOps Security Pipeline
 
-* AWS (S3, EC2, ECS, ECR, ALB, IAM, CloudWatch)
+```mermaid
+flowchart TD
+    A[Git Push] --> B[GitHub Actions]
+
+    B --> C[Terraform Validate]
+
+    C --> D[Checkov Scan]
+
+    D --> E[Docker Build]
+
+    E --> F[Trivy Scan]
+
+    F --> G[Deploy]
+```
+
+* Integrated Checkov security scanning for Terraform
+* Integrated Trivy vulnerability scanning for Docker images
+* Implemented DevSecOps security gates in GitHub Actions
+* Reduced Terraform security findings through remediation
+* Improved container security posture using hardened base images
+* Applied Infrastructure-as-Code security best practices
+
+---
+
+## 📦 Updated Tech Stack
+
+* AWS (S3, EC2, ECS, EKS, ECR, ALB, ACM, IAM, CloudWatch, SNS)
 * Terraform
 * Docker
+* Kubernetes
 * GitHub Actions
+* DevSecOps (Checkov, Trivy)
 * Linux
 
 ---
 
-# 🧠 Skills Demonstrated
+## 🧠 Updated Skills Demonstrated
 
 * Infrastructure as Code (Terraform)
-* CI/CD Pipeline Design
 * Cloud Architecture (AWS)
 * Containerization (Docker)
-* Orchestration (ECS)
+* Kubernetes Administration (EKS)
+* CI/CD Pipeline Design
+* DevSecOps Practices
+* Security Scanning & Vulnerability Management
+* Blue/Green Deployments
 * Auto Scaling & Load Balancing
-* Blue/Green Deployment Strategies
+* HTTPS & Certificate Management
 * Monitoring & Alerting
-* Security Best Practices
+* Infrastructure Security Engineering
 
 ---
 
-# 🚀 Next Steps
+## 🚀 Next Steps
 
-* 🔒 HTTPS with ACM + Domain
-* 📊 Advanced Monitoring Dashboards
-* 🔄 Canary Deployments
-* ☸️ Kubernetes (EKS)
+* Project 15 – GitOps with ArgoCD
+* Project 16 – Detection as Code
+* Project 17 – GuardDuty + Security Hub
+* Project 18 – EKS Production Architecture
 
----
-
-# 👨‍💻 Author
-
-**Wandy Torres**
-Cloud & DevOps Engineer in progress 🚀
+```
+```
