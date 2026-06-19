@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: wandytorres/devsecops-test:latest
+        image: 862087104485.dkr.ecr.us-east-1.amazonaws.com/wandy-docker-app:latest
 
         ports:
         - containerPort: 3000
