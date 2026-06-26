@@ -1,127 +1,534 @@
-# 🚀 Platform Engineer | Infrastructure Security Engineer | Cloud Engineer – Wandy Torres
+# 🚀 Cloud Platform & Infrastructure Security Portfolio
 
-This repository showcases my hands-on journey building **production-style cloud platforms**, secure infrastructure, Kubernetes environments, GitOps pipelines, DevSecOps automation, and Detection-as-Code solutions on AWS.
+### **Wandy Torres**
 
-The projects simulate real-world enterprise environments using Infrastructure as Code (Terraform), Kubernetes (Amazon EKS), GitOps (ArgoCD), DevSecOps security scanning, cloud-native monitoring, and modern infrastructure security practices.
+**Platform Engineer | Infrastructure Security Engineer | Cloud Engineer**
 
 ---
 
-# 🚀 Project 15 – GitOps with ArgoCD
+## 📖 Overview
+
+Welcome to my Cloud Engineering portfolio.
+
+This repository documents my hands-on journey building **production-style cloud infrastructure**, **DevOps pipelines**, **Kubernetes platforms**, **Infrastructure Security**, and **Cloud Native Security** using AWS.
+
+Every project is built following Infrastructure as Code (IaC), automation, security best practices, and production-ready architectures.
+
+The goal of this repository is to demonstrate practical experience with modern Platform Engineering and Infrastructure Security technologies through real-world projects.
+
+---
+
+# 🏗️ Architecture Overview
+
+## Production Architecture (ECS + ALB + Auto Scaling)
 
 ```mermaid
 flowchart TD
-    A[Git Repository] --> B[ArgoCD]
-    B --> C[Amazon EKS]
-    C --> D[Kubernetes Deployment]
-    D --> E[Pods]
+    A[Users] --> B[Application Load Balancer]
+    B --> C[ECS Service]
+    C --> D[Task 1]
+    C --> E[Task 2]
+    E --> F[Auto Scaling]
 ```
-
-### Highlights
-
-* Implemented GitOps workflows using ArgoCD
-* Automated Kubernetes application synchronization
-* Managed Kubernetes manifests directly from Git
-* Enabled declarative application deployments
-* Implemented continuous reconciliation between Git and Kubernetes
 
 ---
 
-# 🚨 Project 16 – Detection as Code
+## Blue / Green Deployment
 
 ```mermaid
 flowchart TD
-    A[CloudTrail / GuardDuty]
-    --> B[Amazon EventBridge]
+    A[Users] --> B[ALB Listener]
 
-    B --> C[SNS Topic]
+    B -->|100%| C[Green Target Group]
 
-    C --> D[Email Security Alerts]
+    B -->|0%| D[Blue Target Group]
+
+    C --> E[ECS Green]
+
+    D --> F[ECS Blue]
 ```
-
-### Highlights
-
-* Built Detection-as-Code using Terraform
-* Created EventBridge rules for:
-
-  * Root Login Detection
-  * Failed Console Login
-  * IAM Policy Changes
-  * Security Group Changes
-  * GuardDuty Findings
-* Automated security notifications using Amazon SNS
-* Implemented cloud-native security monitoring
 
 ---
 
-# 🛡️ Project 17 – Kubernetes Security
+## GitOps Architecture
 
 ```mermaid
-flowchart TD
-    A[Kubernetes Cluster]
+flowchart LR
 
-    --> B[RBAC]
+GitHub --> ArgoCD
 
-    --> C[Network Policies]
+ArgoCD --> AmazonEKS
 
-    --> D[Kubernetes Secrets]
+AmazonEKS --> KubernetesPods
 ```
-
-### Highlights
-
-* Implemented Kubernetes Role-Based Access Control (RBAC)
-* Applied Zero Trust networking using Network Policies
-* Managed sensitive data using Kubernetes Secrets
-* Prepared runtime security architecture for Falco integration
-* Applied Kubernetes security best practices
 
 ---
 
-# 📦 Updated Tech Stack
+## Detection-as-Code
 
-* AWS (EC2, ECS, EKS, ECR, ALB, IAM, ACM, Route53, CloudWatch, SNS, EventBridge, GuardDuty)
+```mermaid
+flowchart LR
+
+CloudTrail --> EventBridge
+
+GuardDuty --> EventBridge
+
+EventBridge --> SNS
+
+SNS --> EmailAlerts
+```
+
+---
+
+## DevSecOps Pipeline
+
+```mermaid
+flowchart LR
+
+GitPush --> GitHubActions
+
+GitHubActions --> TerraformValidate
+
+TerraformValidate --> Checkov
+
+Checkov --> DockerBuild
+
+DockerBuild --> Trivy
+
+Trivy --> Deploy
+```
+
+---
+
+# 🚀 Projects
+
+---
+
+# Project 1 – Static Website (Amazon S3 + CloudFront)
+
+### Technologies
+
+* Amazon S3
+* CloudFront
+
+### Highlights
+
+* Static website hosting
+* CDN implementation
+* Bucket policies
+
+---
+
+# Project 2 – Terraform S3
+
+### Technologies
+
 * Terraform
-* Docker
-* Kubernetes
-* ArgoCD
-* GitHub Actions
-* DevSecOps
 
-  * Trivy
-  * Checkov
-* Detection-as-Code
+### Highlights
+
+* Infrastructure as Code
+* Terraform lifecycle
+* Automated provisioning
+
+---
+
+# Project 3 – Terraform + CloudFront
+
+### Highlights
+
+* Automated CDN deployment
+* Static website automation
+
+---
+
+# Project 4 – EC2 + Nginx
+
+### Technologies
+
+* EC2
+* Nginx
+* Terraform
+
+### Highlights
+
+* EC2 provisioning
+* User Data automation
+* Linux administration
+
+---
+
+# Project 5 – Terraform CI/CD
+
+### Highlights
+
+* GitHub Actions
+* Terraform automation
+* Infrastructure deployment
+
+---
+
+# Project 6 – Secure CI/CD (OIDC)
+
+### Highlights
+
+* GitHub OIDC
+* IAM Roles
+* Removed AWS Access Keys
+
+---
+
+# Project 7 – Multi-Environment Terraform
+
+### Highlights
+
+* Terraform Modules
+* Dev / Production environments
+* tfvars
+* Reusable Infrastructure
+
+---
+
+# Project 8 – Docker + EC2
+
+### Highlights
+
+* Docker
+* Container deployment
+* Automated deployments
+
+---
+
+# Project 9 – ECS + Amazon ECR
+
+### Highlights
+
+* Amazon ECS
+* Amazon ECR
+* Rolling deployments
+
+---
+
+# Project 10 – ECS Production Architecture
+
+### Technologies
+
+* ECS
+* ALB
+* Auto Scaling
+
+### Highlights
+
+* Production-like architecture
+* Health Checks
+* Auto Scaling
+* Load Balancing
+
+---
+
+# Project 11 – Blue / Green Deployment
+
+### Highlights
+
+* Blue/Green deployment
+* Weighted Routing
+* Zero Downtime deployment
+* Rollback strategy
+
+---
+
+# Project 12 – HTTPS + ACM
+
+### Technologies
+
+* ACM
+* Route53
+* ALB
+
+### Highlights
+
+* HTTPS
+* SSL/TLS
+* Custom Domain
+* DNS Validation
+
+---
+
+# Project 13 – Kubernetes (Amazon EKS)
+
+### Technologies
+
+* Amazon EKS
+* Terraform
+* Kubernetes
+
+### Highlights
+
+* Managed Node Groups
+* Kubernetes Deployments
+* LoadBalancer Services
+* kubectl administration
+
+---
+
+# Project 14 – DevSecOps
+
+### Technologies
+
+* GitHub Actions
+* Checkov
+* Trivy
+
+### Highlights
+
+* Infrastructure Security Scanning
+* Container Vulnerability Scanning
+* Security Gates
+* DevSecOps Pipeline
+
+---
+
+# Project 15 – GitOps with ArgoCD
+
+### Technologies
+
+* ArgoCD
+* Amazon EKS
+
+### Highlights
+
+* GitOps
+* Declarative Deployments
+* Continuous Synchronization
+* Kubernetes Application Management
+
+---
+
+# Project 16 – Detection-as-Code
+
+### Technologies
+
+* Terraform
+* EventBridge
+* SNS
+* GuardDuty
+* CloudTrail
+
+### Highlights
+
+Implemented cloud-native detections for:
+
+* Root Login
+* Failed Console Login
+* IAM Changes
+* Security Group Changes
+* GuardDuty Findings
+
+Integrated automated email alerts using Amazon SNS.
+
+---
+
+# Project 17 – Kubernetes Security
+
+### Technologies
+
+* Kubernetes
+* RBAC
+* Network Policies
+* Secrets
+
+### Highlights
+
+* Role-Based Access Control (RBAC)
+* Kubernetes Secrets
+* Zero Trust Networking
+* Network Policies
+* Kubernetes Security Best Practices
+
+---
+
+# 🚧 Current Project
+
+## Project 18 – Kubernetes Runtime Security
+
+Technologies
+
+* Amazon EKS
+* Falco
+* Runtime Security
+* Helm
+
+Objectives
+
+* Runtime Threat Detection
+* Container Escape Detection
+* Reverse Shell Detection
+* Custom Falco Rules
+* Runtime Security Monitoring
+
+---
+
+# 🛠️ Tech Stack
+
+### Cloud
+
+* AWS
+
+  * EC2
+  * ECS
+  * EKS
+  * ECR
+  * ALB
+  * ACM
+  * IAM
+  * SNS
+  * CloudWatch
+  * EventBridge
+  * GuardDuty
+  * Route53
+
+### Infrastructure
+
+* Terraform
+
+### Containers
+
+* Docker
+
+### Kubernetes
+
+* Amazon EKS
+* kubectl
+* ArgoCD
+
+### CI/CD
+
+* GitHub Actions
+
+### DevSecOps
+
+* Checkov
+* Trivy
+
+### Operating Systems
+
 * Linux
-* Git
+* Ubuntu
+
+### Scripting
+
 * Bash
 
 ---
 
-# 🧠 Skills Demonstrated
+# 🎯 Skills Demonstrated
 
-* Cloud Architecture
 * Platform Engineering
-* Infrastructure as Code (Terraform)
-* Amazon EKS Administration
-* GitOps (ArgoCD)
+* Infrastructure Engineering
+* Cloud Engineering
+* Infrastructure as Code
+* Kubernetes Administration
+* GitOps
 * DevSecOps
 * Detection-as-Code
-* Kubernetes Security
 * Infrastructure Security
-* Container Security
 * Cloud Native Security
-* Blue/Green Deployments
+* Container Security
+* CI/CD Automation
 * Auto Scaling
-* CI/CD
+* Blue/Green Deployments
 * Cloud Monitoring
-* Security Automation
+* IAM
+* Zero Trust Concepts
 
 ---
 
-# 🚀 Upcoming Projects
+# 📚 Roadmap
 
-* Project 18 – Kubernetes Runtime Security (Falco)
-* Project 19 – Zero Trust Kubernetes
-* Project 20 – AI-Enabled Security Automation
-* Project 21 – Prometheus + Grafana Observability
-* Project 22 – Ansible Automation
-* Project 23 – AWS Security Hub
-* Project 24 – Multi-Cluster Platform Engineering
+✅ Project 1 — S3 + CloudFront
+
+✅ Project 2 — Terraform S3
+
+✅ Project 3 — CloudFront Automation
+
+✅ Project 4 — EC2 + Nginx
+
+✅ Project 5 — Terraform CI/CD
+
+✅ Project 6 — OIDC Authentication
+
+✅ Project 7 — Multi-Environment Terraform
+
+✅ Project 8 — Docker
+
+✅ Project 9 — ECS + ECR
+
+✅ Project 10 — ECS Production
+
+✅ Project 11 — Blue / Green Deployment
+
+✅ Project 12 — HTTPS + ACM
+
+✅ Project 13 — Amazon EKS
+
+✅ Project 14 — DevSecOps
+
+✅ Project 15 — GitOps
+
+✅ Project 16 — Detection-as-Code
+
+✅ Project 17 — Kubernetes Security
+
+🚧 Project 18 — Kubernetes Runtime Security (Falco)
+
+🔜 Project 19 — Zero Trust Kubernetes
+
+🔜 Project 20 — AI Security Automation
+
+🔜 Project 21 — Prometheus + Grafana
+
+🔜 Project 22 — Ansible Automation
+
+🔜 Project 23 — AWS Security Hub
+
+🔜 Project 24 — Platform Engineering
+
+---
+
+# 📷 Repository Structure
+
+```text
+.
+├── project-1-s3-cloudfront
+├── project-2-terraform-s3
+├── project-3-terraform-cloudfront
+├── project-4-terraform-ec2-nginx
+├── project-5-cicd
+├── project-6-oidc
+├── project-7-multi-environment
+├── project-8-docker
+├── project-9-ecs-ecr
+├── project-10-terraform-ecs-alb
+├── project-11-ecs-blue-green
+├── project-12-https-acm
+├── project-13-eks
+├── project-14-devsecops
+├── project-15-gitops
+├── project-16-detection-as-code
+├── project-17-kubernetes-security
+└── project-18-runtime-security
+```
+
+---
+
+# 👨‍💻 Author
+
+**Wandy Torres**
+
+Platform Engineer • Infrastructure Security Engineer • Cloud Engineer
+
+Dominican Republic 🇩🇴
+
+---
+
+> *"Building secure, scalable, and production-ready cloud platforms through Infrastructure as Code, Kubernetes, DevSecOps, and Cloud Native Security."*
