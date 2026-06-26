@@ -1,6 +1,6 @@
-# 🚀 DevOps & Cloud Journey – Wandy Torres
+# 🚀 Platform Engineer-Infrastructure Security Engineer-Cloud Engineer – Wandy Torres
 
-This repository documents my journey to becoming a **Cloud & DevOps Engineer**, building real-world infrastructure using AWS, Terraform, Docker, and CI/CD pipelines.
+This repository documents my journey to becoming a **Platform Engineer-Infrastructure Security Engineer-Cloud Engineer**, building real-world infrastructure using AWS, Terraform, Docker, and CI/CD pipelines.
 
 ---
 
