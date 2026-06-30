@@ -367,7 +367,22 @@ Objectives
 * Runtime Security Monitoring
 
 ---
+## 📊 Project 19 – Kubernetes Observability
 
+```mermaid
+flowchart LR
+A[Kubernetes Cluster] --> B[Prometheus]
+B --> C[Grafana]
+C --> D[Dashboards]
+```
+
+- Installed Prometheus Operator
+- Installed Grafana
+- Collected Kubernetes metrics
+- Monitored Nodes, Pods and Containers
+- Validated cluster observability
+- Simulated workload scaling
+- Visualized CPU and Memory utilization
 # 🛠️ Tech Stack
 
 ### Cloud
