@@ -438,21 +438,19 @@ C --> D[Dashboards]
 
 # 🎯 Skills Demonstrated
 
-* Platform Engineering
-* Infrastructure Engineering
-* Cloud Engineering
-* Infrastructure as Code
-* Kubernetes Administration
-* GitOps
 * DevSecOps
 * Detection-as-Code
 * Infrastructure Security
 * Cloud Native Security
 * Container Security
+* Runtime Security (Falco)
+* Kubernetes Security
+* Kubernetes Observability
 * CI/CD Automation
 * Auto Scaling
 * Blue/Green Deployments
 * Cloud Monitoring
+* Prometheus & Grafana
 * IAM
 * Zero Trust Concepts
 
@@ -478,7 +476,7 @@ C --> D[Dashboards]
 
 ✅ Project 9 — ECS + ECR
 
-✅ Project 10 — ECS Production
+✅ Project 10 — ECS Production (ALB + Auto Scaling)
 
 ✅ Project 11 — Blue / Green Deployment
 
@@ -486,27 +484,35 @@ C --> D[Dashboards]
 
 ✅ Project 13 — Amazon EKS
 
-✅ Project 14 — DevSecOps
+✅ Project 14 — DevSecOps Pipeline
 
-✅ Project 15 — GitOps
+✅ Project 15 — GitOps with ArgoCD
 
 ✅ Project 16 — Detection-as-Code
 
 ✅ Project 17 — Kubernetes Security
 
-🚧 Project 18 — Kubernetes Runtime Security (Falco)
+✅ Project 18 — Kubernetes Runtime Security (Falco)
 
-🔜 Project 19 — Zero Trust Kubernetes
+✅ Project 19 — Kubernetes Observability (Prometheus + Grafana)
 
-🔜 Project 20 — AI Security Automation
+🔜 Project 20 — Zero Trust Kubernetes
 
-🔜 Project 21 — Prometheus + Grafana
+🔜 Project 21 — Kubernetes Autoscaling (HPA + Cluster Autoscaler)
 
 🔜 Project 22 — Ansible Automation
 
-🔜 Project 23 — AWS Security Hub
+🔜 Project 23 — AWS Security Hub & GuardDuty
 
 🔜 Project 24 — Platform Engineering
+
+🔜 Project 25 — Service Mesh (Istio)
+
+🔜 Project 26 — Kafka on Kubernetes
+
+🔜 Project 27 — GitHub Actions Enterprise CI/CD
+
+🔜 Project 28 — Production Platform Engineering
 
 ---
 
@@ -518,20 +524,19 @@ C --> D[Dashboards]
 ├── project-2-terraform-s3
 ├── project-3-terraform-cloudfront
 ├── project-4-terraform-ec2-nginx
-├── project-5-cicd
-├── project-6-oidc
-├── project-7-multi-environment
-├── project-8-docker
-├── project-9-ecs-ecr
+├── project-8-docker-app
 ├── project-10-terraform-ecs-alb
 ├── project-11-ecs-blue-green
-├── project-12-https-acm
 ├── project-13-eks
 ├── project-14-devsecops
 ├── project-15-gitops
 ├── project-16-detection-as-code
 ├── project-17-kubernetes-security
-└── project-18-runtime-security
+├── project-18-runtime-security
+├── project-19-observability
+├── environments
+├── modules
+└── terraform-backend
 ```
 
 ---
@@ -540,10 +545,8 @@ C --> D[Dashboards]
 
 **Wandy Torres**
 
-Platform Engineer • Infrastructure Security Engineer • Cloud Engineer
+**Platform Engineer | Infrastructure Security Engineer | Cloud Engineer**
 
-Dominican Republic 🇩🇴
+🇩🇴 Dominican Republic
 
----
-
-> *"Building secure, scalable, and production-ready cloud platforms through Infrastructure as Code, Kubernetes, DevSecOps, and Cloud Native Security."*
+AWS • Kubernetes • Terraform • Docker • GitOps • DevSecOps • Observability • Platform Engineering
