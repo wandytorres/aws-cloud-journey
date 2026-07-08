@@ -348,41 +348,80 @@ Integrated automated email alerts using Amazon SNS.
 ---
 
 # 🚧 Current Project
+# Project 18 – Kubernetes Runtime Security with Falco
 
-## Project 18 – Kubernetes Runtime Security
-
-Technologies
+### Technologies
 
 * Amazon EKS
 * Falco
-* Runtime Security
 * Helm
+* Runtime Security
 
-Objectives
+### Highlights
 
-* Runtime Threat Detection
-* Container Escape Detection
-* Reverse Shell Detection
-* Custom Falco Rules
-* Runtime Security Monitoring
+* Installed Falco on EKS
+* Detected shell execution inside containers
+* Created custom Falco runtime rules
+* Validated runtime security alerts
 
 ---
-## 📊 Project 19 – Kubernetes Observability
 
-```mermaid
-flowchart LR
-A[Kubernetes Cluster] --> B[Prometheus]
-B --> C[Grafana]
-C --> D[Dashboards]
-```
+# Project 19 – Kubernetes Observability
 
-- Installed Prometheus Operator
-- Installed Grafana
-- Collected Kubernetes metrics
-- Monitored Nodes, Pods and Containers
-- Validated cluster observability
-- Simulated workload scaling
-- Visualized CPU and Memory utilization
+### Technologies
+
+* Amazon EKS
+* Prometheus
+* Grafana
+* Helm
+
+### Highlights
+
+* Installed Prometheus Operator
+* Installed Grafana
+* Collected Kubernetes metrics
+* Monitored Nodes, Pods and Containers
+* Simulated workload scaling
+* Visualized CPU and Memory utilization
+
+---
+
+# Project 20 – Zero Trust Kubernetes
+
+### Technologies
+
+* Amazon EKS
+* Kubernetes Network Policies
+* Calico
+* Zero Trust Security
+
+### Highlights
+
+* Implemented default deny policies
+* Allowed controlled frontend-to-backend traffic
+* Allowed backend-to-database traffic
+* Documented real-world NetworkPolicy enforcement behavior in EKS
+
+---
+
+# Project 21 – Centralized Logging with Loki + Grafana + Promtail
+
+### Technologies
+
+* Amazon EKS
+* Helm
+* Grafana
+* Loki
+* Promtail
+* LogQL
+
+### Highlights
+
+* Installed Loki for log aggregation
+* Installed Promtail as log collector
+* Connected Grafana to Loki
+* Queried Kubernetes logs using LogQL
+* Validated centralized logging in Grafana Explore
 # 🛠️ Tech Stack
 
 ### Cloud
