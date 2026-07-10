@@ -1,0 +1,32 @@
+---
+- name: Remove Kubernetes application with Ansible
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    target_namespace: ansible-demo
+
+  tasks:
+    - name: Delete application namespace
+      kubernetes.core.k8s:
+        state: absent
+        api_version: v1
+        kind: Namespace
+        name: "{{ target_namespace }}"
+        wait: true
+        wait_timeout: 180
+
+    - name: Verify namespace deletion
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+        name: "{{ target_namespace }}"
+      register: namespace_info
+
+    - name: Display cleanup result
+      ansible.builtin.debug:
+        msg: >-
+          Namespace {{ target_namespace }}
+          {{ 'was deleted successfully'
+             if namespace_info.resources | length == 0
+             else 'still exists' }}

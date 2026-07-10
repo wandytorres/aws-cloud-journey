@@ -1,0 +1,43 @@
+---
+- name: Update Kubernetes application with Ansible
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    namespace: ansible-demo
+    deployment_name: nginx-demo
+    new_image: nginx:1.28-alpine
+
+  tasks:
+    - name: Update Nginx container image
+      kubernetes.core.k8s:
+        state: patched
+        api_version: apps/v1
+        kind: Deployment
+        name: "{{ deployment_name }}"
+        namespace: "{{ namespace }}"
+        definition:
+          spec:
+            template:
+              spec:
+                containers:
+                  - name: nginx
+                    image: "{{ new_image }}"
+
+    - name: Wait until updated replicas are available
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        name: "{{ deployment_name }}"
+        namespace: "{{ namespace }}"
+      register: deployment_info
+      until:
+        - deployment_info.resources | length > 0
+        - deployment_info.resources[0].status.updatedReplicas | default(0) == deployment_info.resources[0].spec.replicas
+        - deployment_info.resources[0].status.availableReplicas | default(0) == deployment_info.resources[0].spec.replicas
+      retries: 30
+      delay: 5
+
+    - name: Display update result
+      ansible.builtin.debug:
+        msg: "Deployment updated successfully to {{ new_image }}"
