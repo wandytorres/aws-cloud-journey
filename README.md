@@ -423,7 +423,26 @@ Integrated automated email alerts using Amazon SNS.
 * Queried Kubernetes logs using LogQL
 * Validated centralized logging in Grafana Explore
 # 🛠️ Tech Stack
+----
 
+# Project 22 – Ansible Automation for Kubernetes
+
+### Technologies
+
+* Ansible
+* Amazon EKS
+* Kubernetes
+* kubernetes.core Collection
+* YAML
+
+### Objectives
+
+* Automate Kubernetes namespace creation
+* Automate application deployment
+* Automate service creation
+* Perform application updates through Ansible
+* Remove Kubernetes workloads using Ansible
+* Validate idempotent infrastructure operations
 ### Cloud
 
 * AWS
@@ -492,6 +511,11 @@ Integrated automated email alerts using Amazon SNS.
 * Prometheus & Grafana
 * IAM
 * Zero Trust Concepts
+* Ansible Automation
+* Kubernetes Automation
+* Configuration Management
+* Idempotent Deployments
+* Infrastructure Operations Automation
 
 ---
 
@@ -539,7 +563,7 @@ Integrated automated email alerts using Amazon SNS.
 
 🔜 Project 21 — Kubernetes Autoscaling (HPA + Cluster Autoscaler)
 
-🔜 Project 22 — Ansible Automation
+🔜 Project 22 — Ansible Automation for Kubernetes
 
 🔜 Project 23 — AWS Security Hub & GuardDuty
 
@@ -573,6 +597,9 @@ Integrated automated email alerts using Amazon SNS.
 ├── project-17-kubernetes-security
 ├── project-18-runtime-security
 ├── project-19-observability
+├── project-20-zero-trust-kubernetes
+├── project-21-observability
+├── project-22-ansible-kubernetes
 ├── environments
 ├── modules
 └── terraform-backend
