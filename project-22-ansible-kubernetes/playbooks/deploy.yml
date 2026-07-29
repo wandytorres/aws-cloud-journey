@@ -1,0 +1,52 @@
+---
+- name: Deploy application to Kubernetes
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    manifests_dir: "{{ playbook_dir }}/../manifests"
+
+  tasks:
+    - name: Create namespace
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ manifests_dir }}/namespace.yaml"
+        wait: true
+        wait_timeout: 60
+
+    - name: Deploy Nginx application
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ manifests_dir }}/deployment.yaml"
+        wait: true
+        wait_condition:
+          type: Available
+          status: "True"
+        wait_timeout: 180
+
+    - name: Create Kubernetes service
+      kubernetes.core.k8s:
+        state: present
+        src: "{{ manifests_dir }}/service.yaml"
+
+    - name: Get deployment information
+      kubernetes.core.k8s_info:
+        api_version: apps/v1
+        kind: Deployment
+        name: nginx-demo
+        namespace: ansible-demo
+      register: deployment_info
+
+    - name: Ensure deployment was found
+      ansible.builtin.assert:
+        that:
+          - deployment_info.resources | length == 1
+        fail_msg: "Deployment nginx-demo was not found in namespace ansible-demo."
+        success_msg: "Deployment nginx-demo was created successfully."
+
+    - name: Show deployment status
+      ansible.builtin.debug:
+        msg:
+          - "Deployment: {{ deployment_info.resources[0].metadata.name }}"
+          - "Desired replicas: {{ deployment_info.resources[0].spec.replicas }}"
+          - "Available replicas: {{ deployment_info.resources[0].status.availableReplicas | default(0) }}"
