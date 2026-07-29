@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-demo
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/wandytorres/aws-cloud-journey.git
+    targetRevision: project-24-platform-engineering
+    path: project-24-platform-engineering/kubernetes
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: platform-demo
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+    syncOptions:
+      - CreateNamespace=true

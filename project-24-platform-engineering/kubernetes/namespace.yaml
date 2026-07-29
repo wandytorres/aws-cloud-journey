@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform-demo
+  labels:
+    project: project-24
+    managed-by: argocd
